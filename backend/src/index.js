@@ -51,9 +51,10 @@ app.use(
   })
 );
 
-// cron jobs
+// cron jobs -> delete files from tmp folder every hour [cwd is the current working directory]
 const tempDir = path.join(process.cwd(), "tmp");
 cron.schedule("0 * * * *", () => {
+  // fs - file system module
   if (fs.existsSync(tempDir)) {
     fs.readdir(tempDir, (err, files) => {
       if (err) {
